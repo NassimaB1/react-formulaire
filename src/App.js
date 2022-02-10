@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React, { useState } from 'react';
+
+
+const Forms = () => {
+  const [Name, setName] = useState('');
+  const [people, setPeople] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (Name) {
+      const person = { id: new Date().getTime().toString(), Name };
+      console.log(person);
+      setPeople((people) => {
+        return [...people, person];
+      });
+      setName('');
+    } else {
+      console.log('empty values');
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <article>
+        <form className='form' onSubmit={handleSubmit}>
+          <div className='form-control'>
+            <label htmlFor='firstName'>Name : </label>
+            <input
+              type='text'
+              id='Name'
+              name='Name'
+              value={Name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <button type='submit'> ADD </button>
+        </form>
+        {people.map((person, index) => {
+          const { id, Name } = person;
+          return (
+            <div className='item' key={id}>
+              <h4>{Name}</h4>
+            </div>
+          );
+        })}
+      </article>
+    </>
   );
-}
+};
 
-export default App;
+export default Forms;
