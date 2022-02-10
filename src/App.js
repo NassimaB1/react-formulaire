@@ -24,7 +24,7 @@ const Forms = () => {
       <article>
         <form className='form' onSubmit={handleSubmit}>
           <div className='form-control'>
-            <label htmlFor='firstName'>Name : </label>
+            <label htmlFor='Name'>Name : </label>
             <input
               type='text'
               id='Name'
